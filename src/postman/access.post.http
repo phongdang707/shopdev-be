@@ -1,0 +1,10 @@
+@hostname = "http://localhost:3030/v1/api"
+###
+POST http://localhost:3030/v1/api/shop/signup
+Content-Type: application/json
+
+{
+    "name": "phong8",
+    "email": "phongdang8@gmail.com",
+    "password": "123123@Abc1"
+}
