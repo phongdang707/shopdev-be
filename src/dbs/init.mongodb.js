@@ -14,7 +14,7 @@ class Database {
   connect(type = "mongodb") {
     console.log("type____", type);
     // dev
-    if (1 === 0) {
+    if (1 === 1) {
       mongoose.set("debug", true);
       mongoose.set("debug", { color: true });
     }
@@ -29,7 +29,6 @@ class Database {
   }
 
   static getInstances() {
-    console.log("getInstances");
     if (!Database.instance) {
       Database.instance = new Database();
     }

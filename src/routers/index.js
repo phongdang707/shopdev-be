@@ -1,10 +1,14 @@
 const express = require("express");
+const { apiKey, permission } = require("../auth/checkAuth");
 const router = express.Router();
 const app = express();
 
+// Check ApiKey
+// router.use(apiKey);
+
+// Check permission
+// router.use(permission("0000"));
+
 router.use("/v1/api", require("./access/index"));
-router.post("/v1/api", (req, res) => {
-  console.log("req________123123", req.body);
-});
 
 module.exports = router;
