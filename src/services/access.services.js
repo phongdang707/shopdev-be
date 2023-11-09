@@ -2,7 +2,7 @@ const shopModel = require("../models/shop.model");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const KeyTokenService = require("./keyToken.services");
-const { createToken } = require("../auth/autUtils");
+const { createToken, verifyJWT } = require("../auth/autUtils");
 const { getInfoData } = require("../utils");
 const { log } = require("console");
 const {
@@ -19,6 +19,36 @@ const RoleShop = {
 };
 
 class AccessService {
+  static handleRefreshToken = async (refreshToken) => {
+    const foundToken = KeyTokenService.findByRefreshTokenUsed(refreshToken);
+    if (foundToken) {
+      const { userId, email } = verifyJWT(refreshToken, foundToken.privateKey);
+      console.log("userId, email", userId, email);
+
+      await KeyTokenService.deleteKeyById(userId);
+      throw new ForbiddenError("something went wrong!! please relogin");
+    }
+
+    const holderToken = await KeyTokenService.findByRefreshToken(refreshToken);
+    if (!holderToken) throw new AuthResponseError("Invalid refresh token");
+
+    const { userId, email } = verifyJWT(refreshToken, foundToken.privateKey);
+    console.log("[2] userId, email", userId, email);
+
+    const foundShop = await findByEmail({ email });
+    if (!foundShop) throw new AuthResponseError("Invalid refresh token");
+
+    const tokens = await createToken(
+      { userId: foundShop._id, email },
+      holderToken.publicKey,
+      holderToken.privateKey
+    );
+  };
+  static logout = async (keyStore) => {
+    const delKey = await KeyTokenService.removeKeyById(keyStore._id);
+    return delKey;
+  };
+
   static login = async ({ email, password, refreshToken = null }) => {
     const foundShop = await findByEmail({ email });
     if (!foundShop) throw new BadResponseError("Error: Shop not found");

@@ -19,3 +19,17 @@ x-api-key: "12312"
     "email": "phongdang10@gmail.com",
     "password": "123123@Abc1"
 }
+
+###
+POST http://localhost:3030/v1/api/shop/logout
+Content-Type: application/json
+x-api-key: "12312"
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTQyNjViN2E2NTkwNWY3NGUxY2NjYmUiLCJlbWFpbCI6InBob25nZGFuZzEwQGdtYWlsLmNvbSIsImlhdCI6MTY5OTA2NzU3MSwiZXhwIjoxNjk5MjQwMzcxfQ.pDAXmGy22kqdj5uTgzXJfhwVVji4BqYp2oudQlQ4zkQ
+x-client-id: 654265b7a65905f74e1cccbe
+
+###
+POST http://localhost:3030/v1/api/shop/ahihi
+Content-Type: application/json
+x-api-key: 12312
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTQyNjViN2E2NTkwNWY3NGUxY2NjYmUiLCJlbWFpbCI6InBob25nZGFuZzEwQGdtYWlsLmNvbSIsImlhdCI6MTY5OTA2OTgzOCwiZXhwIjoxNjk5MjQyNjM4fQ.My416s6t_bray-0JaR7aGcKw_a3cQNwh4OG00d9PHVU
+x-client-id: 654265b7a65905f74e1cccbe
